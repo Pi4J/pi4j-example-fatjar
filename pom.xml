@@ -86,7 +86,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>be.webtechie.pi4jgpio.App</mainClass>
+                            <mainClass>com.pi4j.example.MinimalExample</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
