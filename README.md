@@ -12,6 +12,25 @@ and digital input (push button). Full description is available on [the Pi4J webs
 
 The goal of the example project is to show how to set up a Pi4J Maven / Gradle project for the Raspberry Pi.
 
+## MAVEN SHADE PLUGIN
+
+Because of the use of the ServiceLoader to dynamically load the plugins which are part of the project, the FAT JAR created
+by this code, all the files in `META-INF/services` need to be merged into one. This is not possible with the `Maven Assembly
+Plugin` that could be used with Pi4J V1.
+
+A solution was found based on
+
+* Replies to [this tweet](https://twitter.com/khmarbaise/status/1479368488787578880) by [Robert Scholte](https://twitter.com/rfscholte)
+and [Karl Heinz Marbaise](Karl Heinz Marbaise)
+* Replies to [this GitHub discussion](https://github.com/Pi4J/pi4j-v2/discussions/178) by [Michael Paus ](https://github.com/mipastgt)
+
+To create a correct FAT JAR the `Maven Shade Plugin' needs to be used, with the additional 
+[ServicesResourceTransformer](https://maven.apache.org/plugins/maven-shade-plugin/examples/resource-transformers.html#ServicesResourceTransformer). 
+As described on the Apache documentation page: *JAR files providing implementations of some interfaces often ship with 
+a META-INF/services/ directory that maps interfaces to their implementation classes for lookup by the service locator. 
+To relocate the class names of these implementation classes, and to merge multiple implementations of the same interface 
+into one service entry, the ServicesResourceTransformer can be used.*
+
 ## WIRING
 
 The application needs a LED connected on BCM 22 and button on BCM 24. 
@@ -28,9 +47,7 @@ dependency comes pre-installed on recent Raspbian images.  However, you can also
 download and install it yourself using the instructions found 
 [here](http://abyz.me.uk/rpi/pigpio/download.html).
 
-## BUILD DEPENDENCIES & INSTRUCTIONS
-
-### Maven
+## MAVEN BUILD DEPENDENCIES & INSTRUCTIONS
 
 This project can be built with [Apache Maven](https://maven.apache.org/) 3.6 
 (or later) and Java 11 OpenJDK (or later). These prerequisites must be installed 
@@ -42,52 +59,14 @@ project directly on a Raspberry Pi with Java 11+.
 mvn clean package
 ```
 
-### Gradle
-
-You can also use the [Gradle Build Tool](https://gradle.org/) from these same sources. 
-Use version 6.6 (or later) and Java 11 OpenJDK (or later). The Gradle wrapper is used as 
-described on [docs.gradle.org"](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
-
-On Linux:
-
-```
-./gradlew build
-```
-
-On Windows:
-
-```
-gradlew.bat build
-```
-
 ### Compiled application to run on the Raspberry Pi
 
-Once the build is complete and was successful, you can find the compiled 
-artifacts in the `target` (Maven) or `build` (Gradle) folder.  Specifically 
-all dependency modules (JARs) and a simple `run.sh` bash script will be located in the 
-`target/distribution` (Maven) or `build/distribution` (Gradle) folder.  
-
-These are all the required files needed to distribute (copy) to your
-Raspberry Pi to run this project.  If you are using the native bindings running 
-locally on the Raspberry Pi, then you make have to run the program using `sudo` 
-to gain the necessary access permissions to the hardware I/O. 
-
-This is the list of files created by the build process of this example application:
-
-* pi4j-core
-* pi4j-example-minimal
-* pi4j-library-pigpio
-* pi4j-plugin-pigpio
-* pi4j-plugin-raspberrypi
-* slf4j-api
-* slf4j-simple
-* run.sh --> this is the actual start file which will run pi4j-example-minimal
-
-Make the run script executable and start it like this:
+Once the build is complete and was successful, you can find the compiled FAT JAR `pi4j-example-fatjar.jar` in the 
+`target` directory. Copy this file to your Raspberry Pi of you are developing on a different computer, and run the 
+application with 
 
 ```
-chmod +x run.sh
-sudo ./run.sh
+sudo java -jar pi4j-example-fatjar.jar
 ```
 
 ## LICENSE
