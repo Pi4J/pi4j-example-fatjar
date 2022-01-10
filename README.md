@@ -24,7 +24,7 @@ A solution was found based on
 and [Karl Heinz Marbaise](Karl Heinz Marbaise)
 * Replies to [this GitHub discussion](https://github.com/Pi4J/pi4j-v2/discussions/178) by [Michael Paus ](https://github.com/mipastgt)
 
-To create a correct FAT JAR the `Maven Shade Plugin' needs to be used, with the additional 
+To create a correct FAT JAR the `Maven Shade Plugin` needs to be used, with the additional 
 [ServicesResourceTransformer](https://maven.apache.org/plugins/maven-shade-plugin/examples/resource-transformers.html#ServicesResourceTransformer). 
 As described on the Apache documentation page: *JAR files providing implementations of some interfaces often ship with 
 a META-INF/services/ directory that maps interfaces to their implementation classes for lookup by the service locator. 
