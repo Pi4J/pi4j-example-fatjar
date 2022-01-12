@@ -54,7 +54,7 @@ mvn clean package
 ```
 
 Once the build is complete and was successful, you can find the compiled FAT JAR `pi4j-example-fatjar.jar` in the
-`target` directory. Copy this file to your Raspberry Pi or if you are developing on a different computer, copy the file 
+`target` directory. You can build directly on your Raspberry Pi or if you are developing on a different computer, copy the file 
 to your Raspberry Pi with (in this example the Pi has IP 192.168.0.252):
 
 ```
