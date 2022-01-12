@@ -14,6 +14,7 @@
     <properties>
         <!-- PROJECT ENCODING PROPERTIES -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <main.class>com.pi4j.example.MinimalExample</main.class>
 
         <!-- JAVA COMPILER VERSIONS -->
         <java.version>11</java.version>
@@ -25,8 +26,8 @@
         <pi4j.version>2.0</pi4j.version>
 
         <!-- BUILD PLUGIN VERSIONS -->
-        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
     </properties>
 
@@ -66,6 +67,10 @@
         <finalName>pi4j-example-fatjar</finalName>
 
         <plugins>
+            <!--
+            https://maven.apache.org/plugins/maven-compiler-plugin/
+            The Compiler Plugin is used to compile the sources of your project.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -78,6 +83,30 @@
                 </configuration>
             </plugin>
 
+            <!--
+            https://maven.apache.org/plugins/maven-jar-plugin/
+            This plugin provides the capability to build (executable) jars and is used here to set the mainClass
+            which will start the application.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!--
+            https://maven.apache.org/plugins/maven-shade-plugin/
+            This plugin provides the capability to package the artifact in an uber-jar, including its dependencies and
+            to shade - i.e. rename - the packages of some of the dependencies. The transformer will combine the files
+            in the META-INF.services directories of multiple Pi4J plugins with the same package name into one file.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
