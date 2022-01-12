@@ -47,13 +47,15 @@ prior to building this project. The following command can be used to download
 all project dependencies and compile the Java module. You can build this 
 project on a development PC or directly on a Raspberry Pi with Java 11+.  
 
-Build with
+Build with:
 
 ```
 mvn clean package
 ```
 
-When you build on PC, copy the file to your Raspberry Pi with (in this example the Pi has IP 192.168.0.252)
+Once the build is complete and was successful, you can find the compiled FAT JAR `pi4j-example-fatjar.jar` in the
+`target` directory. Copy this file to your Raspberry Pi or if you are developing on a different computer, copy the file 
+to your Raspberry Pi with (in this example the Pi has IP 192.168.0.252):
 
 ```
 scp target/pi4j-example-fatjar.jar pi@192.168.0.252://home/pi
@@ -63,7 +65,6 @@ On the Raspberry Pi open a terminal, or via SSH from your PC, execute this comma
 
 ```
 $ sudo java -jar pi4j-example-fatjar.jar 
-
 
 [main] INFO com.pi4j.util.Console - 
 
@@ -144,17 +145,6 @@ REGISTRY: [2] "I/O Registered Instances" <com.pi4j.registry.impl.DefaultRegistry
 [main] INFO com.pi4j.util.Console - LED low
 [main] INFO com.pi4j.util.Console - LED high
 ...
-```
-
-
-### Compiled application to run on the Raspberry Pi
-
-Once the build is complete and was successful, you can find the compiled FAT JAR `pi4j-example-fatjar.jar` in the 
-`target` directory. Copy this file to your Raspberry Pi of you are developing on a different computer, and run the 
-application with 
-
-```
-sudo java -jar pi4j-example-fatjar.jar
 ```
 
 ## LICENSE
