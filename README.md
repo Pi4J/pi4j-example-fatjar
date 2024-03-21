@@ -34,10 +34,6 @@ The application needs a LED connected on BCM 22 and button on BCM 24.
 This project uses Pi4J V.2 which has the following runtime dependency requirements:
 - [**SLF4J (API)**](https://www.slf4j.org/)
 - [**SLF4J-SIMPLE**](https://www.slf4j.org/)
-- [**PIGPIO Library**](http://abyz.me.uk/rpi/pigpio) (for the Raspberry Pi) - This 
-dependency comes pre-installed on recent Raspbian images.  However, you can also 
-download and install it yourself using the instructions found 
-[here](http://abyz.me.uk/rpi/pigpio/download.html).
 
 ## MAVEN BUILD DEPENDENCIES & INSTRUCTIONS
 
@@ -64,7 +60,7 @@ scp target/pi4j-example-fatjar.jar pi@192.168.0.252://home/pi
 On the Raspberry Pi open a terminal, or via SSH from your PC, execute this command:
 
 ```
-$ sudo java -jar pi4j-example-fatjar.jar 
+$ java -jar pi4j-example-fatjar.jar 
 
 [main] INFO com.pi4j.util.Console - 
 

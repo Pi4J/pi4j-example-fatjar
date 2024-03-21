@@ -105,22 +105,14 @@ public class MinimalExample {
         // Here we will create I/O interfaces for a (GPIO) digital output
         // and input pin. Since no specific 'provider' is defined, Pi4J will
         // use the default `DigitalOutputProvider` for the current default platform.
-        var ledConfig = DigitalOutput.newConfigBuilder(pi4j)
-                .id("led")
-                .name("LED Flasher")
-                .address(PIN_LED)
-                .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
-        var led = pi4j.create(ledConfig);
+        var led = pi4j.digitalOutput().create(PIN_LED);
 
         var buttonConfig = DigitalInput.newConfigBuilder(pi4j)
                 .id("button")
                 .name("Press button")
                 .address(PIN_BUTTON)
                 .pull(PullResistance.PULL_DOWN)
-                .debounce(3000L)
-                .provider("pigpio-digital-input");
+                .debounce(3000L);
         var button = pi4j.create(buttonConfig);
         button.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
