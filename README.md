@@ -4,17 +4,15 @@
 GitHub Actions: ![Maven build](https://github.com/pi4j/pi4j-example-fatjar/workflows/Maven/badge.svg)
 
 This project contains a minimal example application which uses the Pi4J (V2) library and uses a digital output (LED) 
-and digital input (push button). Full description is available on [the Pi4J website](https://v2.pi4j.com/getting-started/minimal-example-application)
+and digital input (push button). Full description is available on [the Pi4J website](https://pi4j.com/getting-started/minimal-example-application-fatjar/)
 
 ## PROJECT OVERVIEW
 
-The goal of the example project is to show how to set up a Pi4J Maven / Gradle project for the Raspberry Pi.
+The goal of the example project is to show how to set up a Pi4J Maven project for the Raspberry Pi to build a FatJAR with the Pi4J dependencies.
 
 ## MAVEN SHADE PLUGIN
 
-Because of the use of the ServiceLoader to dynamically load the plugins which are part of the project, the FAT JAR created
-by this code, all the files in `META-INF/services` need to be merged into one. This is not possible with the `Maven Assembly
-Plugin` that could be used with Pi4J V1.
+Because of the use of the ServiceLoader to dynamically load the plugins which are part of the project, all the files in `META-INF/services` need to be merged into one. This is not possible with the `Maven Assembly Plugin` that could be used with Pi4J V1.
 
 To create a correct FAT JAR the `Maven Shade Plugin` needs to be used, with the additional 
 [ServicesResourceTransformer](https://maven.apache.org/plugins/maven-shade-plugin/examples/resource-transformers.html#ServicesResourceTransformer). 
@@ -51,7 +49,7 @@ mvn clean package
 
 Once the build is complete and was successful, you can find the compiled FAT JAR `pi4j-example-fatjar.jar` in the
 `target` directory. You can build directly on your Raspberry Pi or if you are developing on a different computer, copy the file 
-to your Raspberry Pi with (in this example the Pi has IP 192.168.0.252):
+to your Raspberry Pi with (in this example the RPi has the IP address 192.168.0.252):
 
 ```
 scp target/pi4j-example-fatjar.jar pi@192.168.0.252://home/pi
