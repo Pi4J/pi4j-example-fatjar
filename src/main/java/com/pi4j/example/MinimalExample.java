@@ -29,7 +29,6 @@ package com.pi4j.example;
 
 import com.pi4j.Pi4J;
 import com.pi4j.io.gpio.digital.DigitalInput;
-import com.pi4j.io.gpio.digital.DigitalOutput;
 import com.pi4j.io.gpio.digital.DigitalState;
 import com.pi4j.io.gpio.digital.PullResistance;
 import com.pi4j.util.Console;
@@ -54,7 +53,7 @@ public class MinimalExample {
      * @param args an array of {@link java.lang.String} objects.
      * @throws java.lang.Exception if any.
      */
-    public static void main(String[] args) throws Exception {
+     static void main(String[] args) throws Exception {
         // Create Pi4J console wrapper/helper
         // (This is a utility class to abstract some of the boilerplate stdin/stdout code)
         final var console = new Console();

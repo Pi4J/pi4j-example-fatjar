@@ -1,5 +1,5 @@
-# Pi4J V2 :: Minimal "FAT JAR" example application
-==================================================
+# Pi4J :: Minimal "FAT JAR" example application
+===============================================
 
 GitHub Actions: ![Maven build](https://github.com/pi4j/pi4j-example-fatjar/workflows/Maven/badge.svg)
 
