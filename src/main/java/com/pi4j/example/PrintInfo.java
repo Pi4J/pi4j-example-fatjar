@@ -65,7 +65,9 @@ public class PrintInfo {
         // platforms that Pi4J detected when it was initialized.
         console.box("Pi4J DEFAULT PLATFORM");
         console.println();
-        platform.describe().print(System.out);
+        if (platform != null) {
+            platform.describe().print(System.out);
+        }
         console.println();
     }
 
